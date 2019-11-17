@@ -35,6 +35,12 @@ public class UserService {
 	 * (() -> new ObjectNotFoundException("Objeto não encontrado")) = Através de um callback disparar a exception personalizada
 	 */
 	
+
+	public void delete(String id) {
+		repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));//Aproveita para usar a exception do metodo findById caso não exista id
+		repository.deleteById(id);
+	}
+	
 	public User insert(User obj) {
 		return repository.insert(obj);
 	}
