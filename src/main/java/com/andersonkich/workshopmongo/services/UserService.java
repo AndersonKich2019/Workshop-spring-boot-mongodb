@@ -45,8 +45,20 @@ public class UserService {
 		return repository.insert(obj);
 	}
 	
+	public User update(User obj) {                               //Recebe o usuario com os novos dados
+		Optional<User> newObj = repository.findById(obj.getId());
+		User obj1 = new User(newObj.get().getId(), newObj.get().getNome(), newObj.get().getEmail());//Convert o OPTIONAL	
+		updateData(obj1, obj);                                 //Atualiza o usuario com os novos dados
+		return repository.save(obj1);                   //Salva no db
+		
+	}
 	
-	public User fromDTO(UserDTO objDTO) {
+	private void updateData(User obj1, User obj) {//Atualiza o usuario com os novos dados
+		obj1.setNome(obj.getNome());
+		obj1.setEmail(obj.getEmail());
+	}
+
+	public User fromDTO(UserDTO objDTO) {//Converte um usuarioDto em usuario
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
 	}
 	
