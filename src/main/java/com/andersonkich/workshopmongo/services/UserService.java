@@ -47,14 +47,14 @@ public class UserService {
 	
 	public User update(User obj) {                               //Recebe o usuario com os novos dados
 		Optional<User> newObj = repository.findById(obj.getId());
-		User obj1 = new User(newObj.get().getId(), newObj.get().getNome(), newObj.get().getEmail());//Convert o OPTIONAL	
+		User obj1 = new User(newObj.get().getId(), newObj.get().getName(), newObj.get().getEmail());//Convert o OPTIONAL	
 		updateData(obj1, obj);                                 //Atualiza o usuario com os novos dados
 		return repository.save(obj1);                   //Salva no db
 		
 	}
 	
 	private void updateData(User obj1, User obj) {//Atualiza o usuario com os novos dados
-		obj1.setNome(obj.getNome());
+		obj1.setName(obj.getName());
 		obj1.setEmail(obj.getEmail());
 	}
 

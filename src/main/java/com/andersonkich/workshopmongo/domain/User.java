@@ -1,8 +1,11 @@
 package com.andersonkich.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "User")//cria o nome que quizer na tabela db
@@ -13,6 +16,9 @@ public class User implements Serializable{
 	private String id;
 	private String name;
 	private String email;
+	
+	@DBRef(lazy = true)//Referenciar o Post
+	private List<Post> list = new ArrayList<>();
 	
 	public User() {
 		
@@ -32,20 +38,28 @@ public class User implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return name;
-	}
-
-	public void setNome(String name) {
-		this.name = name;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Post> getList() {
+		return list;
+	}
+
+	public void setList(List<Post> list) {
+		this.list = list;
 	}
 
 	@Override
