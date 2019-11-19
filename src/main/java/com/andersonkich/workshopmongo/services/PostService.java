@@ -22,7 +22,7 @@ public class PostService {
 	}
 	
 	public List<Post> findByTitle(String text){
-		return repository.findByTitleContaining(text);//Usando Query Methods no repository
+		return repository.searchTitle(text);//Usando Query Methods no repository
 	}
 	
 }
